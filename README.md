@@ -54,6 +54,6 @@ Loops
 Conditional Statements
 User Input Handling
 
-<img width="1920" height="1080" alt="Screenshot (81)" src="https://github.com/user-attachments/assets/e505f238-d878-4ef3-84e2-df314c047641" />
 
+<img width="1356" height="463" alt="WhatsApp Image 2026-04-13 at 9 44 30 PM (1)" src="https://github.com/user-attachments/assets/6f6de456-6a97-462f-a8bd-364b58f7818b" />
 
