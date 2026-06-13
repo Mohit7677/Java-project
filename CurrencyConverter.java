@@ -118,7 +118,7 @@ public class CurrencyConverter {
 
                 case 0:
                     System.out.println("\nThank you for using Currency Converter!");
-                    System.out.println("-- Mukesh Sahu | ERP: 10852 --");
+                    System.out.println("-- Mohit Kumar | ERP: 10837 --");
                     break;
 
                 default:
