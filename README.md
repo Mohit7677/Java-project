@@ -53,3 +53,6 @@ Static Methods
 Loops
 Conditional Statements
 User Input Handling
+
+
+<img width="1356" height="463" alt="image" src="https://github.com/user-attachments/assets/b9ece696-004d-4673-b185-4a0860d401d4" />
