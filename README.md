@@ -54,5 +54,6 @@ Loops
 Conditional Statements
 User Input Handling
 
+<img width="1920" height="1080" alt="Screenshot (81)" src="https://github.com/user-attachments/assets/e505f238-d878-4ef3-84e2-df314c047641" />
 
-<img width="1356" height="463" alt="image" src="https://github.com/user-attachments/assets/b9ece696-004d-4673-b185-4a0860d401d4" />
+
