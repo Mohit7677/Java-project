@@ -1,132 +1,273 @@
-import java.util.Scanner;
+File: CurrencyConverter.java
+
+import java.util.*;
+
+class Currency {
+
+private String code;
+private double rate;
+
+public Currency(String code, double rate) {
+    this.code = code.toUpperCase();
+    this.rate = rate;
+}
+
+public String getCode() {
+    return code;
+}
+
+public double getRate() {
+    return rate;
+}
+
+}
 
 class ConverterEngine {
 
-    public static final double USD_TO_INR = 83.0;
-    public static final double EUR_TO_INR = 90.0;
-    public static final double GBP_TO_INR = 105.0;
+private static ArrayList<String> history = new ArrayList<>();
 
-    public static double convert(int amount, String currencyType) {
-        return convert((double) amount, currencyType);
+public static double convert(double amount, Currency currency) {
+    return amount * currency.getRate();
+}
+
+public static double convertToForeign(double inr, Currency currency) {
+    return inr / currency.getRate();
+}
+
+public static void saveHistory(String record) {
+    history.add(record);
+}
+
+public static void showHistory() {
+
+    if (history.isEmpty()) {
+        System.out.println("No conversion history.");
+        return;
     }
 
-    public static double convert(double amount, String currencyType) {
-       
-        String currency = currencyType.toUpperCase();
+    System.out.println("\n===== Conversion History =====");
 
-        if (currency.equals("USD")) {
-            return amount * USD_TO_INR;
-        } else if (currency.equals("EUR")) {
-            return amount * EUR_TO_INR;
-        } else if (currency.equals("GBP")) {
-            return amount * GBP_TO_INR;
-        } else {
-           
-            return 0;
-        }
+    for (String s : history) {
+        System.out.println(s);
     }
+}
 
-    public static void showSupportedCurrencies() {
-        System.out.println("\n  Supported Currencies:");
-        System.out.println("  +--------------+------+------------------+");
-        System.out.println("  | Currency     | Code | Rate (per unit)  |");
-        System.out.println("  +--------------+------+------------------+");
-        System.out.println("  | US Dollar    | USD  | Rs. 83.00        |");
-        System.out.println("  | Euro         | EUR  | Rs. 90.00        |");
-        System.out.println("  | British Pound| GBP  | Rs. 105.00       |");
-        System.out.println("  +--------------+------+------------------+");
+public static void showCurrencies() {
+
+    System.out.println("\nSupported Currencies");
+    System.out.println("-------------------------");
+    System.out.println("USD → Rs.83");
+    System.out.println("EUR → Rs.90");
+    System.out.println("GBP → Rs.105");
+}
+
+public static Currency getCurrency(String code) {
+
+    code = code.toUpperCase();
+
+    switch (code) {
+
+        case "USD":
+            return new Currency("USD", 83);
+
+        case "EUR":
+            return new Currency("EUR", 90);
+
+        case "GBP":
+            return new Currency("GBP", 105);
+
+        default:
+            return null;
     }
+}
+
 }
 
 public class CurrencyConverter {
 
-    public static void main(String[] args) {
+public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
-        int choice;
+    Scanner sc = new Scanner(System.in);
 
-        do {
-        
-            System.out.println("\n======================================");
-            System.out.println("     GLOBAL CURRENCY CONVERTER        ");
-            System.out.println("======================================");
-            System.out.println("--- MENU ---");
+    int choice = -1;
+
+    while (choice != 0) {
+
+        try {
+
+            System.out.println("\n==============================");
+            System.out.println(" GLOBAL CURRENCY CONVERTER ");
+            System.out.println("==============================");
+
             System.out.println("1. Show Supported Currencies");
             System.out.println("2. Convert Currency to INR");
-            System.out.println("3. Convert Multiple Amounts (same currency)");
+            System.out.println("3. Convert INR to Currency");
+            System.out.println("4. Convert Multiple Amounts");
+            System.out.println("5. View History");
             System.out.println("0. Exit");
-            System.out.println("--------------------------------------");
-            System.out.print("Choice: ");
+
+            System.out.print("Enter Choice: ");
+
             choice = sc.nextInt();
 
             switch (choice) {
 
                 case 1:
-                
-                    ConverterEngine.showSupportedCurrencies();
+
+                    ConverterEngine.showCurrencies();
                     break;
 
                 case 2:
-                    System.out.println("\n-- Currency Conversion --");
-                    ConverterEngine.showSupportedCurrencies();
 
-                    System.out.print("\nEnter Amount: ");
+                    System.out.print("Amount: ");
                     double amount = sc.nextDouble();
 
-                    System.out.print("Enter Currency Code (USD / EUR / GBP): ");
-                    String currency = sc.next();
-
-                   
-                    double result = ConverterEngine.convert(amount, currency);
-
-                    if (result == 0) {
-                        System.out.println("ERROR: Invalid currency type! Supported: USD, EUR, GBP");
-                    } else {
-                        System.out.println("\n--------------------------------------");
-                        System.out.println("  Amount        : " + amount + " " + currency.toUpperCase());
-                        System.out.println("  Converted INR : Rs. " + result);
-                        System.out.println("--------------------------------------");
+                    if (amount <= 0) {
+                        System.out.println("Invalid amount.");
+                        break;
                     }
+
+                    System.out.print("Currency Code: ");
+                    String code = sc.next();
+
+                    Currency c =
+                            ConverterEngine.getCurrency(code);
+
+                    if (c == null) {
+                        System.out.println("Invalid Currency");
+                        break;
+                    }
+
+                    double result =
+                            ConverterEngine.convert(amount, c);
+
+                    String output =
+                            amount + " " +
+                            c.getCode() +
+                            " = Rs." +
+                            result;
+
+                    System.out.println(output);
+
+                    ConverterEngine.saveHistory(output);
+
                     break;
 
                 case 3:
-                
-                    System.out.println("\n-- Convert Multiple Amounts --");
-                    System.out.print("Enter Currency Code (USD / EUR / GBP): ");
-                    String curr = sc.next();
 
-                    System.out.print("How many amounts to convert? ");
+                    System.out.print("INR Amount: ");
+
+                    double inr = sc.nextDouble();
+
+                    System.out.print("Currency Code: ");
+
+                    String target = sc.next();
+
+                    Currency curr =
+                            ConverterEngine.getCurrency(target);
+
+                    if (curr == null) {
+                        System.out.println("Invalid Currency");
+                        break;
+                    }
+
+                    double foreign =
+                            ConverterEngine.convertToForeign(
+                                    inr,
+                                    curr
+                            );
+
+                    String reverse =
+                            "Rs." +
+                            inr +
+                            " = " +
+                            foreign +
+                            " " +
+                            curr.getCode();
+
+                    System.out.println(reverse);
+
+                    ConverterEngine.saveHistory(reverse);
+
+                    break;
+
+                case 4:
+
+                    System.out.print("Currency Code: ");
+
+                    String multi = sc.next();
+
+                    Currency multiCurr =
+                            ConverterEngine.getCurrency(multi);
+
+                    if (multiCurr == null) {
+                        System.out.println("Invalid Currency");
+                        break;
+                    }
+
+                    System.out.print("Number of amounts: ");
+
                     int n = sc.nextInt();
 
-                    System.out.println("\n--------------------------------------");
-                    int i = 1;
-                    while (i <= n) {
-                        System.out.print("  Enter Amount " + i + ": ");
-                        double amt = sc.nextDouble();
-                        double res = ConverterEngine.convert(amt, curr);
+                    for (int i = 1; i <= n; i++) {
 
-                        if (res == 0) {
-                            System.out.println("  ERROR: Invalid currency! Supported: USD, EUR, GBP");
-                            break;
-                        } else {
-                            System.out.println("  " + amt + " " + curr.toUpperCase() + " = Rs. " + res);
-                        }
-                        i++;
+                        System.out.print(
+                                "Amount " + i + ": "
+                        );
+
+                        double a = sc.nextDouble();
+
+                        double r =
+                                ConverterEngine.convert(
+                                        a,
+                                        multiCurr
+                                );
+
+                        String record =
+                                a +
+                                " " +
+                                multi +
+                                " = Rs." +
+                                r;
+
+                        System.out.println(record);
+
+                        ConverterEngine.saveHistory(record);
                     }
-                    System.out.println("--------------------------------------");
+
+                    break;
+
+                case 5:
+
+                    ConverterEngine.showHistory();
                     break;
 
                 case 0:
-                    System.out.println("\nThank you for using Currency Converter!");
-                    System.out.println("-- Mohit Kumar | ERP: 10837 --");
+
+                    System.out.println(
+                            "Thank You"
+                    );
+
                     break;
 
                 default:
-                    System.out.println("ERROR: Invalid choice! Please enter 0-3.");
+
+                    System.out.println(
+                            "Enter valid choice"
+                    );
             }
 
-        } while (choice != 0);
+        } catch (Exception e) {
 
-        sc.close();
+            System.out.println(
+                    "Invalid Input"
+            );
+
+            sc.nextLine();
+        }
     }
+
+    sc.close();
+}
+
 }
