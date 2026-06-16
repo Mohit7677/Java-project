@@ -1,59 +1,103 @@
-# 💱 Global Currency Converter (Java)
+Global Currency Converter
 
-A simple menu-driven Currency Converter Application developed in Java.
-This project converts USD, EUR, and GBP into INR using predefined exchange rates.
+Project Overview
 
-## 📌 Features
+Global Currency Converter is a Java-based console application developed using Object-Oriented Programming concepts.
 
-- Display supported currencies and exchange rates
-- Convert a single amount to INR
-- Convert multiple amounts of the same currency
-- Menu-driven interface
-- Method Overloading for conversion
-- Case-insensitive currency code handling
-- Input validation for unsupported currencies
+The application converts foreign currencies into INR and also supports reverse conversion from INR to foreign currency.
 
-## 🛠 Technologies Used
+---
+
+Objectives
+
+- Implement OOP concepts in Java
+- Perform currency conversion
+- Create a menu-driven application
+- Handle user input and exceptions
+
+---
+
+Features
+
+- Currency to INR Conversion
+- INR to Currency Conversion
+- Multiple Amount Conversion
+- Conversion History
+- Exception Handling
+- Menu Driven Interface
+
+---
+
+Technologies Used
 
 - Java
-- Object-Oriented Programming (OOP)
+- OOP Concepts
 - Scanner Class
+- ArrayList
 
-## 📂 Project Structure
+---
+
+OOP Concepts Used
+
+1. Class
+2. Object
+3. Encapsulation
+4. Method Overloading
+5. Abstraction
+6. Exception Handling
+
+---
+
+Project Structure
 
 CurrencyConverter.java
-│
-├── ConverterEngine
-│ ├── convert(int amount, String currencyType)
-│ ├── convert(double amount, String currencyType)
-│ └── showSupportedCurrencies()
-│
-└── CurrencyConverter
-└── main()
 
-## ▶️ How to Run
+Classes:
 
-Compile:
+- Currency
+- ConverterEngine
+- CurrencyConverter
 
-```bash
+---
+
+Supported Currencies
+
+USD → INR
+EUR → INR
+GBP → INR
+
+---
+
+How to Run
+
+1. Open terminal
+2. Compile:
+
 javac CurrencyConverter.java
 
+3. Execute:
+
 java CurrencyConverter
-Choice: 2
 
-Enter Amount: 100
-Enter Currency Code: USD
+---
 
-Converted INR : Rs. 8300.0
+Sample Output
 
-🎯 Concepts Used
-Classes and Objects
-Method Overloading
-Static Methods
-Loops
-Conditional Statements
-User Input Handling
+1. Show Supported Currencies
+2. Convert Currency to INR
+3. Convert INR to Currency
+4. Convert Multiple Amounts
+5. View History
+6. Exit
 
+---
 
-<img width="1356" height="463" alt="WhatsApp Image 2026-04-13 at 9 44 30 PM (1)" src="https://github.com/user-attachments/assets/6f6de456-6a97-462f-a8bd-364b58f7818b" />
+Conclusion
 
+This project demonstrates practical implementation of Java OOP concepts through a real-world currency conversion system with user interaction and exception handling.
+
+---
+
+Author:
+Mohit Kumar
+B.Tech CSE
